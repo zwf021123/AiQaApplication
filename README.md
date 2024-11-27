@@ -1,4 +1,4 @@
-# yudada-frontend
+# AiQaApplication-frontend
 
 ## Project setup
 ```
