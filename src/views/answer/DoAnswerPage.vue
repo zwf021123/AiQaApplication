@@ -106,15 +106,16 @@ const id = ref<number>();
 
 // 生成唯一 id
 const generateId = async () => {
-  const params = {
-    appId: props.appId as any,
-  };
-  const res = await aiGenerateQuestionUsingPost(params);
-  if (res.data.code === 0) {
-    id.value = res.data.data as any;
-  } else {
-    message.error("获取唯一 id 失败，" + res.data.message);
-  }
+  return;
+  // const params = {
+  //   appId: props.appId as any,
+  // };
+  // const res = await aiGenerateQuestionUsingPost(params);
+  // if (res.data.code === 0) {
+  //   id.value = res.data.data as any;
+  // } else {
+  //   message.error("获取唯一 id 失败，" + res.data.message);
+  // }
 };
 
 // 进入页面时，生成唯一 id

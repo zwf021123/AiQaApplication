@@ -24,8 +24,8 @@
         </a-form-item>
         <a-form-item field="questionNumber" label="题目数量">
           <a-input-number
-            min="0"
-            max="20"
+            :min="0"
+            :max="20"
             v-model="form.questionNumber"
             placeholder="请输入题目数量"
             :disabled="submitting"
@@ -33,8 +33,8 @@
         </a-form-item>
         <a-form-item field="optionNumber" label="选项数量">
           <a-input-number
-            min="0"
-            max="6"
+            :min="0"
+            :max="6"
             v-model="form.optionNumber"
             placeholder="请输入选项数量"
             :disabled="submitting"
@@ -160,14 +160,15 @@ const handleSSESubmit = async () => {
   };
   // 报错或连接关闭时触发
   eventSource.onerror = function (event) {
+    console.log(event);
     if (event.eventPhase === EventSource.CLOSED) {
       console.log("关闭连接");
-      props.onSSEClose?.(event);
+      // props.onSSEClose?.(event);
       eventSource.close();
-      submitting.value = false;
     } else {
       eventSource.close();
     }
+    submitting.value = false;
   };
 };
 </script>

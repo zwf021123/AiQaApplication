@@ -35,7 +35,7 @@
 import { ref, watchEffect } from "vue";
 import AppCard from "@/components/AppCard.vue";
 import API from "@/api";
-import { listIndexAppUsingPost } from "@/api/appController";
+import { listMyAppUsingPost } from "@/api/appController";
 import message from "@arco-design/web-vue/es/message";
 import { REVIEW_STATUS_ENUM } from "@/constant/app";
 import { useLoginUserStore } from "@/store/userStore";
@@ -66,7 +66,7 @@ const loadData = async () => {
   };
   try {
     searchLoading.value = true;
-    const res = await listIndexAppUsingPost(params);
+    const res = await listMyAppUsingPost(params);
     if (res.data.code === 0) {
       dataList.value = res.data.data?.records || [];
       total.value = res.data.data?.total || 0;
