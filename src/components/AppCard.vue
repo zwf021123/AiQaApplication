@@ -18,7 +18,24 @@
         />
       </div>
     </template>
-    <a-card-meta :title="app.appName" :description="app.appDesc">
+    <a-card-meta :description="app.appDesc">
+      <template #title>
+        <div class="title">
+          <div class="title-front">
+            {{ app.appName }}
+          </div>
+          <div
+            class="title-end"
+            v-if="app.reviewStatus !== undefined && app.reviewStatus !== null"
+          >
+            <a-tag
+              size="small"
+              :color="REVIEW_STATUS_COLOR_MAP[app.reviewStatus]"
+              >{{ app.reviewStatusName }}</a-tag
+            >
+          </div>
+        </div>
+      </template>
       <template #avatar>
         <div
           :style="{ display: 'flex', alignItems: 'center', color: '#1D2129' }"
@@ -42,6 +59,7 @@ import API from "@/api";
 import { defineProps, ref, withDefaults } from "vue";
 import { useRouter } from "vue-router";
 import ShareModal from "@/components/ShareModal.vue";
+import { REVIEW_STATUS_COLOR_MAP } from "@/constant/app";
 
 interface Props {
   app: API.AppVO;
@@ -76,6 +94,10 @@ const doShare = (e: Event) => {
 <style scoped>
 .appCard {
   cursor: pointer;
+  :deep(.title) {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .icon-hover {

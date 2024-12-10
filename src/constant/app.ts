@@ -15,6 +15,13 @@ export const REVIEW_STATUS_MAP = {
   2: "拒绝",
 };
 
+// 审核状态颜色映射
+export const REVIEW_STATUS_COLOR_MAP = {
+  0: "orangered",
+  1: "green",
+  2: "red",
+};
+
 // 应用类型枚举
 export const APP_TYPE_ENUM = {
   // 得分类

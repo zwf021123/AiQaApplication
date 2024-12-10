@@ -61,7 +61,6 @@ const total = ref<number>(0);
 const loadData = async () => {
   const params = {
     createUser: loginUserStore.loginUser.userName,
-    reviewStatus: [REVIEW_STATUS_ENUM.PASS],
     ...searchParams.value,
   };
   try {
