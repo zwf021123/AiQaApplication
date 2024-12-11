@@ -54,6 +54,16 @@
                 </span>
               </a-space>
             </a-doption>
+            <a-doption @click="logoutFn">
+              <!-- <a-space @click="switchRoles"> -->
+              <a-space>
+                <icon-export />
+                <span>
+                  <!-- {{ $t("messageBox.switchRoles") }} -->
+                  退出登录
+                </span>
+              </a-space>
+            </a-doption>
           </template>
         </a-dropdown>
         <div class="bottom">
@@ -104,6 +114,14 @@ const visibleRoutes = computed(() => {
 const doMenuClick = (key: string) => {
   router.push({
     path: key,
+  });
+};
+
+// 退出登录
+const logoutFn = () => {
+  loginUserStore.logout();
+  router.push({
+    path: "/",
   });
 };
 </script>

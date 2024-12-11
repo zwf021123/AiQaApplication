@@ -68,25 +68,36 @@
     </template>
     <template #optional="{ record }">
       <a-space>
-        <a-button
-          v-if="record.reviewStatus !== REVIEW_STATUS_ENUM.PASS"
-          status="success"
-          size="mini"
-          @click="doReview(record, REVIEW_STATUS_ENUM.PASS, '')"
+        <a-popconfirm
+          :content="`你确定要通过 ${record.appName} 的审核吗？`"
+          @ok="doReview(record, REVIEW_STATUS_ENUM.PASS, '')"
         >
-          通过
-        </a-button>
-        <a-button
-          v-if="record.reviewStatus !== REVIEW_STATUS_ENUM.REJECT"
-          status="warning"
-          size="mini"
-          @click="doReview(record, REVIEW_STATUS_ENUM.REJECT, '不符合上架要求')"
+          <a-button
+            v-if="record.reviewStatus === REVIEW_STATUS_ENUM.REVIEWING"
+            status="success"
+            size="mini"
+          >
+            通过
+          </a-button>
+        </a-popconfirm>
+        <a-popconfirm
+          :content="`你确定要拒绝 ${record.appName} 的审核吗？`"
+          @ok="doReview(record, REVIEW_STATUS_ENUM.REJECT, '不符合上架要求')"
         >
-          拒绝
-        </a-button>
-        <a-button status="danger" size="mini" @click="doDelete(record)"
-          >删除</a-button
+          <a-button
+            v-if="record.reviewStatus === REVIEW_STATUS_ENUM.REVIEWING"
+            status="warning"
+            size="mini"
+          >
+            拒绝
+          </a-button>
+        </a-popconfirm>
+        <a-popconfirm
+          :content="`你确定要删除 ${record.appName} 吗？`"
+          @ok="doDelete(record)"
         >
+          <a-button status="danger" size="mini">删除</a-button>
+        </a-popconfirm>
       </a-space>
     </template>
   </a-table>

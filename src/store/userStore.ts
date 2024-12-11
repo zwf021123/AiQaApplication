@@ -9,9 +9,7 @@ import ACCESS_ENUM from "@/access/accessEnum";
 export const useLoginUserStore = defineStore(
   "loginUser",
   () => {
-    const loginUser = ref<API.LoginUserVO>({
-      userName: "zwf",
-    });
+    const loginUser = ref<API.LoginUserVO>({});
     const token = ref<string>("");
 
     function setToken(newToken: string) {
@@ -25,6 +23,8 @@ export const useLoginUserStore = defineStore(
     async function fetchLoginUser() {
       try {
         const res = await getLoginUserUsingGet();
+        console.log("fetchLoginUser", res);
+
         if (res.data.code === 0 && res.data.data) {
           loginUser.value = res.data.data;
         } else {
@@ -35,7 +35,12 @@ export const useLoginUserStore = defineStore(
       }
     }
 
-    return { loginUser, token, setToken, setLoginUser, fetchLoginUser };
+    function logout() {
+      loginUser.value = { userRole: ACCESS_ENUM.NOT_LOGIN };
+      setToken("");
+    }
+
+    return { loginUser, token, setToken, setLoginUser, fetchLoginUser, logout };
   },
   {
     persist: {

@@ -1,8 +1,9 @@
 import axios from "axios";
 import { useLoginUserStore } from "@/store/userStore";
 
+// 10.161.119.50
 const myAxios = axios.create({
-  baseURL: "http://10.161.119.50:8080",
+  baseURL: "http://127.0.0.1:8080",
   timeout: 60000,
   withCredentials: false,
 });
